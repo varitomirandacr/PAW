@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PAW.APITests.Controllers
 {
-    internal class CatalogControllerTests
+    public class CatalogControllerTests
     {
     }
 }
