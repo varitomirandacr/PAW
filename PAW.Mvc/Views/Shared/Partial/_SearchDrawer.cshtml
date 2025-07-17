@@ -1,0 +1,55 @@
+﻿@using PAW.Models.PAWModels
+@model ConditionViewModel
+
+<div id="searchDrawer" class="position-fixed top-0 end-0 bg-dark border-start shadow h-100 p-4"
+     style="width: 300px; transform: translateX(100%); transition: transform 0.3s ease-in-out; z-index: 1050;">
+    <button type="button" class="btn-close float-end" id="closeDrawer" aria-label="Close"></button>
+    <h5 class="mt-4 mb-3">Advanced Search</h5>
+
+    <form asp-action="Search" method="post" class="content">
+        <div class="mb-3">
+            <label for="Property" class="form-label">Property</label>
+            <input type="text" class="form-control" id="Property" name="Property" value="@Model.Property" />
+        </div>
+
+        <div class="mb-3">
+            <label for="Criteria" class="form-label">Criteria</label>
+            <select class="form-select" id="Criteria" name="Criteria" onchange="handleCriteriaChange(this.value)">
+                <option value="">-- Select Criteria --</option>
+                <option value="Equals">Equals</option>
+                <option value="Contains">Contains</option>
+                <option value="GreaterThanOrEqual">Greater Than or Equal</option>
+                <option value="LessThanOrEqual">Less Than or Equal</option>
+            </select>
+        </div>
+
+        <!-- Show for Equals / Contains -->
+        <div id="valueContainer" class="mb-3 d-none">
+            <label for="Value" class="form-label">Value</label>
+            <input type="text" class="form-control" id="Value" name="Value" value="@Model.Value" />
+        </div>
+
+        <!-- Show for GreaterThanOrEqual / LessThanOrEqual -->
+        <div id="rangeContainer" class="mb-3 d-none">
+            <label class="form-label">Start</label>
+            <input type="number" class="form-control mb-2" id="Start" name="Start" value="@Model.Start" step="any" />
+
+            <label class="form-label">End</label>
+            <input type="number" class="form-control" id="End" name="End" value="@Model.End" step="any" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+
+<style>
+    .overlay {
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+    }
+
+    .content {
+        z-index: 2;
+    }
+</style>
+
