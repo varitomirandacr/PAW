@@ -8,7 +8,7 @@ namespace PAW.API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class CatalogController(IBusinessCatalog businessCatalog) : Controller
+public class CatalogApiController(IBusinessCatalog businessCatalog) : Controller
 {
     [HttpGet(Name = "GetCatalogs")]
     public async Task<IEnumerable<Catalog>> GetAll()
@@ -26,7 +26,7 @@ public class CatalogController(IBusinessCatalog businessCatalog) : Controller
     [HttpPost("filter", Name = "FilterCatalogs")]
     public async Task<IEnumerable<CatalogViewModel>> Filter(ConditionViewModel condition)
     {
-        var predicate = ConditionResolver.ResolveCondition(condition.Criteria, condition.Property, condition.Value, condition.Start, condition.End);
+        var predicate = ConditionResolver<Catalog>.ResolveCondition(condition.Criteria, condition.Property, condition.Value, condition.Start, condition.End);
         var results = await businessCatalog.Filter(predicate);
         return results;
     }

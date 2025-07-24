@@ -10,12 +10,12 @@ using Xunit;
 public class CatalogControllerTests
 {
     private readonly Mock<IBusinessCatalog> _mockBusinessCatalog;
-    private readonly CatalogController _controller;
+    private readonly CatalogApiController _controller;
 
     public CatalogControllerTests()
     {
         _mockBusinessCatalog = new Mock<IBusinessCatalog>();
-        _controller = new CatalogController(_mockBusinessCatalog.Object);
+        _controller = new CatalogApiController(_mockBusinessCatalog.Object);
     }
 
     [Fact]

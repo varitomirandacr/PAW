@@ -2,11 +2,11 @@
 
 namespace PAW.Models
 {
-    public static class ConditionResolver
+    public static class ConditionResolver<T>
     {
-        public static Expression<Func<Catalog, bool>> ResolveCondition(string searchCriteria, string propName, string value, decimal start, decimal end = 0)
+        public static Expression<Func<T, bool>> ResolveCondition(string searchCriteria, string propName, string value, decimal start, decimal end = 0)
         {
-            var propInfo = typeof(Catalog).GetProperty(propName, System.Reflection.BindingFlags.IgnoreCase
+            var propInfo = typeof(T).GetProperty(propName, System.Reflection.BindingFlags.IgnoreCase
                 | System.Reflection.BindingFlags.Public
                 | System.Reflection.BindingFlags.Instance)
                 ?? throw new NotSupportedException($"Condition not supported for property: {propName}");
@@ -72,7 +72,7 @@ namespace PAW.Models
                 body = Expression.AndAlso(hasValue, body);
             }
 
-            return Expression.Lambda<Func<Catalog, bool>>(body, param);
+            return Expression.Lambda<Func<T, bool>>(body, param);
         }
     }
 }
