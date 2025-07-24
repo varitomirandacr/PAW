@@ -22,4 +22,6 @@ public partial class CatalogTask
     public string ModifiedBy { get; set; } = null!;
 
     public string CreatedBy { get; set; } = null!;
+
+    public decimal? TaskType { get; set; }
 }
